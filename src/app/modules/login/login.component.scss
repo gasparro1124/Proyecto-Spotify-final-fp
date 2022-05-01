@@ -1,0 +1,35 @@
+@import '../../../assets/styles-variables.scss';
+
+:host{
+  background-color: $color-fondo;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    align-content: flex-start;
+    align-items: center;
+
+    img{
+      margin-top: 3%;
+      width: 900px;
+      padding-bottom: 30%;
+    }
+
+    button{
+      background-color: $green-spotify;
+      width: 200px;
+      height: 50px;
+      font-size: large;
+      font-weight: bold;
+      color: white;
+      border-radius: 60px;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
