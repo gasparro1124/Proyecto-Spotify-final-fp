@@ -1,0 +1,44 @@
+:host {
+  display: block;
+  width: 100%;
+
+  :hover{
+    background-color: gray;
+  }
+
+  button {
+    margin: 5px 0;
+    width: 100%;
+    border: 0;
+    padding: 10px 0px 10px 20px;
+    border-radius: 5px;
+    text-align: left;
+    font-weight: 800;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      width: 150px;
+      white-space: nowrap;
+      margin-left: 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    color:white;
+    background-color: transparent;
+
+    &.seleccionado{
+      background-color:rgb(111, 219, 90);
+      color: white;
+      span{
+        background-color: rgb(111, 219, 90);
+      }
+      i{
+        background-color: rgb(111, 219, 90);
+      }
+    }
+  }
+}

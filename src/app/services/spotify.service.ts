@@ -4,6 +4,9 @@ import { SpotifyConfiguration } from 'src/environments/environment';
 import spotify from 'spotify-web-api-js';
 
 import { UserInterface } from '../core/models/userInterface';
+import { PlayList } from '../core/models/PlayList';
+
+import { SpotifyPlayList_PlayList } from '../core/mappers/playListMapper';
 import { SpotifyUser_apiToUser } from '../core/mappers/userMapper';
 
 
@@ -66,5 +69,13 @@ export class SpotifyService {
   saveAccessToken(token:string){
     this.spotifyApi.setAccessToken(token)
     localStorage.setItem('token',token)
+  }
+
+
+  ///////////////////////////////////////////////////////////////////////////////
+
+  async buscarPlayList(offset = 0, limit=50): Promise<PlayList[]>{
+    const playLists = await this.spotifyApi.getUserPlaylists(this.user.id , {offset,limit});
+    return playLists.items.map(SpotifyPlayList_PlayList)
   }
 }
