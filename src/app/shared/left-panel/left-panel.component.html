@@ -32,7 +32,7 @@
     <span class="playlist-title">
       PLAYLIST
     </span>
-    <i class="uil uil-plus"></i>
+    <i mat-raised-button class="uil uil-plus" (click)="openDialog()"></i>
 
     <div class="playlist-scroll">
       <app-menu-boton *ngFor="let playlist of playLists"

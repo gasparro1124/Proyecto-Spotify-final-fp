@@ -8,6 +8,9 @@ import { BottomPanelComponent } from 'src/app/shared/bottom-panel/bottom-panel.c
 import { RouterModule } from '@angular/router';
 import { HomeRoutes } from './home.routes';
 import { MenuBotonComponent } from 'src/app/shared/menu-boton/menu-boton.component';
+import { AddPlayListComponent } from '../../shared/add-play-list/add-play-list.component';
+
+
 
 
 
@@ -18,6 +21,7 @@ import { MenuBotonComponent } from 'src/app/shared/menu-boton/menu-boton.compone
     LeftPanelComponent,
     BottomPanelComponent,
     MenuBotonComponent,
+    AddPlayListComponent
   ],
   imports: [
     CommonModule,

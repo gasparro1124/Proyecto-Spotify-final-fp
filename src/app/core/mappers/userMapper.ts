@@ -4,6 +4,7 @@ export function SpotifyUser_apiToUser(user: SpotifyApi.CurrentUsersProfileRespon
   return {
     id:user.id,
     name:user.display_name!,
-    imagenUrl:user.images?.pop()?.url!
+    imagenUrl:user.images?.pop()?.url!,
+    uri:user.uri
   }
 }

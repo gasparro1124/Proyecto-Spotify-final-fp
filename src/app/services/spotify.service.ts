@@ -78,4 +78,8 @@ export class SpotifyService {
     const playLists = await this.spotifyApi.getUserPlaylists(this.user.id , {offset,limit});
     return playLists.items.map(SpotifyPlayList_PlayList)
   }
+
+  async createPlayList(){
+    await this.spotifyApi.createPlaylist(this.user.id,{"name":"Hola","description":"hello","public":true})
+  }
 }
