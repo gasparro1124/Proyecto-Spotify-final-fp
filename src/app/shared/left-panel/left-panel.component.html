@@ -1,52 +1,56 @@
-<div class="menu">
-  <div class="imagen-menu">
-    <img src="../../../assets/images/logos/Spotify_Logo_CMYK_Green.png" alt="">
-  </div>
-  <div class="menu-container">
-    <app-menu-boton
-      [descripcion]="'Home'"
-      [icon]="homeIcon"
-      [seleccionado]="menuSelecionado =='Home'"
-      (click) = "botonClick('Home')"
-      >
-    </app-menu-boton>
+<div class="panel">
 
-    <app-menu-boton
-      [descripcion]="'Search'"
-      [icon]="seacrhIcon"
-      [seleccionado] ="menuSelecionado =='Search'"
-      (click) = "botonClick('Search')"
-      >
-    </app-menu-boton>
+  <div class="menu">
+    <div class="imagen-menu">
+      <img src="../../../assets/images/logos/Spotify_Logo_CMYK_Green.png" alt="">
+    </div>
+    <div class="menu-container">
+      <app-menu-boton
+        [descripcion]="'Home'"
+        [icon]="homeIcon"
+        [seleccionado]="menuSelecionado =='Home'"
+        (click) = "homeClick('Home')"
+        >
+      </app-menu-boton>
 
-    <app-menu-boton
-      [descripcion]="'Artist'"
-      [icon]="artistIcon"
-      [seleccionado] = "menuSelecionado =='Artist'"
-      (click) = "botonClick('Artist')"
-      >
-    </app-menu-boton>
-  </div>
+      <app-menu-boton
+        [descripcion]="'Search'"
+        [icon]="seacrhIcon"
+        [seleccionado] ="menuSelecionado =='Search'"
+        (click) = "botonClick('Search')"
+        >
+      </app-menu-boton>
 
-  <div class="playList-menu" >
-    <span class="playlist-title">
-      PLAYLIST
-    </span>
-    <i mat-raised-button class="uil uil-plus" (click)="openDialog()"></i>
-
-    <div class="playlist-scroll">
-      <app-menu-boton *ngFor="let playlist of playLists"
-        [icon]= "playlisticon"
-        [descripcion]="playlist.name"
-        [seleccionado]="menuSelecionado == playlist.id"
-        (click) = "botonClick(playlist.id);"
-        ></app-menu-boton>
+      <app-menu-boton
+        [descripcion]="'Artist'"
+        [icon]="artistIcon"
+        [seleccionado] = "menuSelecionado =='Artist'"
+        (click) = "botonClick('Artist')"
+        >
+      </app-menu-boton>
     </div>
 
+    <div class="playList-menu" >
+      <span class="playlist-title">
+        PLAYLIST
+      </span>
+      <i mat-raised-button class="uil uil-plus" (click)="openDialog()"></i>
+
+      <div class="playlist-scroll">
+        <app-menu-boton *ngFor="let playlist of playLists"
+          [icon]= "playlisticon"
+          [descripcion]="playlist.name"
+          [seleccionado]="menuSelecionado == playlist.id"
+          (click) = "botonClick(playlist.id);"
+          ></app-menu-boton>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="user-logout">
+    <app-user-panel></app-user-panel>
   </div>
 </div>
 
-<div class="user-logout">
-  <p>adios</p>
-</div>
 

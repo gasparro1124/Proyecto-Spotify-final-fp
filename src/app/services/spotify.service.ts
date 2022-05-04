@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SpotifyConfiguration } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 import spotify from 'spotify-web-api-js';
 
@@ -8,6 +9,9 @@ import { PlayList } from '../core/models/PlayList';
 
 import { SpotifyPlayList_PlayList } from '../core/mappers/playListMapper';
 import { SpotifyUser_apiToUser } from '../core/mappers/userMapper';
+import { SpotifyTrack_Track } from '../core/mappers/tracks';
+import { Tracks } from '../core/models/tracksInterface';
+
 
 
 @Injectable({
@@ -18,7 +22,7 @@ export class SpotifyService {
   spotifyApi:spotify.SpotifyWebApiJs =new spotify();
   user!:UserInterface
 
-  constructor() {
+  constructor(private router: Router) {
     this.spotifyApi = new spotify()
   }
 
@@ -71,8 +75,13 @@ export class SpotifyService {
     localStorage.setItem('token',token)
   }
 
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['/login'])
+  }
 
-  ///////////////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////// PLAYLIST //////////////////////////////////////////////
 
   async buscarPlayList(offset = 0, limit=50): Promise<PlayList[]>{
     const playLists = await this.spotifyApi.getUserPlaylists(this.user.id , {offset,limit});
@@ -81,5 +90,17 @@ export class SpotifyService {
 
   async createPlayList(){
     await this.spotifyApi.createPlaylist(this.user.id,{"name":"Hola","description":"hello","public":true})
+  }
+
+
+  ///////////////////////////////////////////Mi musica//////////////////////////////////////////
+  async getMyMusic():Promise<Tracks[]>{
+    const music =  await this.spotifyApi.getMyRecentlyPlayedTracks()
+    let yourSongs:Tracks[] = []
+    music.items.map(x => {
+      const song = SpotifyTrack_Track(x.track)
+      yourSongs.push(song)
+    })
+    return yourSongs
   }
 }
