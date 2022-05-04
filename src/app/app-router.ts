@@ -5,7 +5,7 @@ import { SpotifyGuard } from './core/guards/spotify.guard';
 export const appRoutes:Routes=[
   {
     path:'',
-    redirectTo:'home',
+    redirectTo:'home/your-music',
     pathMatch:'full'
   },
   {

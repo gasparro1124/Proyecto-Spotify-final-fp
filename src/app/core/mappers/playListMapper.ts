@@ -1,4 +1,4 @@
-import { PlayList } from '../models/PlayList';
+import { PlayList } from '../models/playlistInterface';
 
 
 export function SpotifyPlayList_PlayList(playlist:SpotifyApi.PlaylistObjectSimplified):PlayList{

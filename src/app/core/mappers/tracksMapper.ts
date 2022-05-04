@@ -1,7 +1,7 @@
 import { newTracks } from '../makers/trackEmpty';
 import { Tracks } from '../models/tracksInterface';
 
-export function SpotifyTrack_Track(track:SpotifyApi.TrackObjectSimplified):Tracks{
+export function SpotifyTrack_Tracksimplified(track:SpotifyApi.TrackObjectSimplified):Tracks{
 
   let song = newTracks()
 
