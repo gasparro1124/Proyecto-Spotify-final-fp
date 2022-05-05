@@ -1,17 +1,18 @@
 <div class="mi-musica">
   <p class="titulo" >
-    tus canciones
+    Tus canciones
   </p>
 
   <div class="card-container">
-    <mat-card *ngFor="let song of songs">
+    <mat-card *ngFor="let song of songs" [class.executing]="song.id == currentSong.id">
       <div class="img-container">
         <img src={{song.album?.imagenUrl}}>
         <p>{{song.title}}</p>
       </div>
       <div class="info">
         <p>{{song.time}}</p>
-        <button class="uil uil-play play"></button>
+        <button class="uil uil-play play" (click)="launchMusic(song)"></button>
+        <button class="uil uil-plus" (click)="openDialog()"></button>
       </div>
     </mat-card>
   </div>

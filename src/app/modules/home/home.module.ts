@@ -7,11 +7,12 @@ import { BottomPanelComponent } from 'src/app/shared/bottom-panel/bottom-panel.c
 
 import { RouterModule } from '@angular/router';
 import { HomeRoutes } from './home.routes';
-import { MenuBotonComponent } from 'src/app/shared/menu-boton/menu-boton.component';
+import { MenuBotonComponent } from 'src/app/shared/menu-button/menu-boton.component';
 import { AddPlayListComponent } from '../../shared/add-play-list/add-play-list.component';
 import { UserPanelComponent } from 'src/app/shared/user-panel/user-panel.component';
 import { YourMusicComponent } from '../your-music/your-music.component';
 import {MatCardModule} from '@angular/material/card';
+import { AddToPlaylistComponent } from '../../shared/add-to-playlist/add-to-playlist.component';
 
 
 
@@ -25,6 +26,7 @@ import {MatCardModule} from '@angular/material/card';
     BottomPanelComponent,
     MenuBotonComponent,
     AddPlayListComponent,
+    AddToPlaylistComponent,
     UserPanelComponent,
     YourMusicComponent,
   ],

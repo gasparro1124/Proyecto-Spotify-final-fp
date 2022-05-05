@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog,MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PlayList } from 'src/app/core/models/playlistInterface';
 import { SpotifyService } from '../../services/spotify.service';

@@ -11,4 +11,5 @@ export interface Tracks {
     imagenUrl: string
   },
   time: string
+  uri:string
 }

@@ -11,5 +11,6 @@ export function newTracks(): Tracks {
     artist: [],
     time: '',
     title: '',
+    uri:''
   }
 }

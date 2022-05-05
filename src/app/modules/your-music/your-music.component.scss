@@ -6,7 +6,7 @@
     width: 12px;
 
     &-thumb{
-      background-color: rgba(0, 128, 0, 0.247);
+      background-color: rgb(111, 219, 90);
       border-radius: 30%;
     }
   }
@@ -18,7 +18,7 @@
     width: 100%;
     height: 100%;
     overflow-y: scroll;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(230, 3, 3, 0);
 
     .titulo{
       height: 15%;
@@ -35,6 +35,13 @@
 
       :hover{
         background-color: grey;
+      }
+
+      .executing{
+        background-color: rgb(74, 226, 74);
+        :hover{
+          background-color: rgb(74, 226, 74);
+        }
       }
 
       mat-card{
@@ -76,6 +83,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
+            background-color: gray;
           }
 
           button:hover{

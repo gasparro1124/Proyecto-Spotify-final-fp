@@ -9,7 +9,7 @@ import { PlayList } from '../core/models/playlistInterface';
 
 import { SpotifyPlayList_PlayList } from '../core/mappers/playListMapper';
 import { SpotifyUser_apiToUser } from '../core/mappers/userMapper';
-import {  SpotifyTrack_Tracksimplified } from '../core/mappers/tracksMapper';
+import {  spotifyTrack_TracksFull, SpotifyTrack_Tracksimplified } from '../core/mappers/tracksMapper';
 import { Tracks } from '../core/models/tracksInterface';
 import { Artist } from '../core/models/artistaInterface';
 import { spotifyArtist_Artista, spotifyArtist_ArtistIndependent } from '../core/mappers/artistMapper';
@@ -111,6 +111,11 @@ export class SpotifyService {
     return yourSongs
   }
 
+  // async BuscarCanciones(offset = 0, limit=50):Promise<Tracks[]>{
+  //   const canciones = await this.spotifyApi.getMySavedTracks({offset, limit});
+  //   return canciones.items.map(x => spotifyTrack_TracksFull(x.track))
+  // }
+
   /////////////////////////////////////////Top Artistas /////////////////////////////////////////
 
   async buscarTopArtistas(limit = 10):Promise<Artist[]>{
@@ -151,30 +156,30 @@ export class SpotifyService {
   }
 
 ////////////////////////////////// Interact with Music ///////////////////////////////////
-  // async obtenerMusicaActual():Promise<Tracks>{
-  //   const musica = await this.spotifyApi.getMyCurrentPlayingTrack()
-  //   return spotifyTrackparaMusica(musica.item)
-  // }
+  async obtenerMusicaActual():Promise<Tracks>{
+    const musica = await this.spotifyApi.getMyCurrentPlayingTrack()
+    return spotifyTrack_TracksFull(musica.item as SpotifyApi.TrackObjectFull)
+  }
 
 
-  async ejecutarMusica(muscaId:string){
-    await this.spotifyApi.queue(muscaId)
+  async lunchMusic(muscaUri:string){
+    await this.spotifyApi.queue(muscaUri)
     await this.spotifyApi.skipToNext()
   }
 
-  async anteriorCancion(){
+  async prewiusSong(){
     await this.spotifyApi.skipToPrevious()
   }
 
-  async siguienteCancion(){
+  async nextSong(){
     await this.spotifyApi.skipToNext()
   }
 
-  async pausarCancion(){
+  async stopSong(){
     await this.spotifyApi.pause()
   }
 
-  async continuarCancion(){
+  async play(){
     await this.spotifyApi.play()
   }
 
