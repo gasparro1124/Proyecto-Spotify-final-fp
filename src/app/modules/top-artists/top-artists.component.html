@@ -1,0 +1,13 @@
+<div class="my-artist">
+  <p class="title" >
+    Top Artistas
+  </p>
+  <div class="card-container">
+    <mat-card *ngFor="let artist of topArtist">
+      <div class="img-container">
+        <img src={{artist.imagenUrl}}>
+        <p>{{artist.name}}</p>
+      </div>
+    </mat-card>
+  </div>
+</div>

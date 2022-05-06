@@ -13,6 +13,7 @@ import { UserPanelComponent } from 'src/app/shared/user-panel/user-panel.compone
 import { YourMusicComponent } from '../your-music/your-music.component';
 import {MatCardModule} from '@angular/material/card';
 import { AddToPlaylistComponent } from '../../shared/add-to-playlist/add-to-playlist.component';
+import { TopArtistsComponent } from '../top-artists/top-artists.component';
 
 
 
@@ -29,6 +30,7 @@ import { AddToPlaylistComponent } from '../../shared/add-to-playlist/add-to-play
     AddToPlaylistComponent,
     UserPanelComponent,
     YourMusicComponent,
+    TopArtistsComponent
   ],
   imports: [
     CommonModule,

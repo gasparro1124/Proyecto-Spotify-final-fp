@@ -29,6 +29,8 @@ export class SpotifyService {
   spotifyApi:spotify.SpotifyWebApiJs =new spotify();
   user!:UserInterface
 
+  TopArtist:Artist[] = []
+
   constructor(private router: Router) {
     this.spotifyApi = new spotify()
   }
@@ -90,7 +92,7 @@ export class SpotifyService {
 
   ///////////////////////////////// PLAYLIST //////////////////////////////////////////////
 
-  async buscarPlayList(offset = 0, limit=50): Promise<PlayList[]>{
+  async searchPlayList(offset = 0, limit=50): Promise<PlayList[]>{
     const playLists = await this.spotifyApi.getUserPlaylists(this.user.id , {offset,limit});
     return playLists.items.map(SpotifyPlayList_PlayList)
   }
@@ -111,52 +113,56 @@ export class SpotifyService {
     return yourSongs
   }
 
-  // async BuscarCanciones(offset = 0, limit=50):Promise<Tracks[]>{
+  // async SearchMySongs(offset = 0, limit=50):Promise<Tracks[]>{
   //   const canciones = await this.spotifyApi.getMySavedTracks({offset, limit});
   //   return canciones.items.map(x => spotifyTrack_TracksFull(x.track))
   // }
 
   /////////////////////////////////////////Top Artistas /////////////////////////////////////////
 
-  async buscarTopArtistas(limit = 10):Promise<Artist[]>{
-    const artistas = await this.spotifyApi.getMyTopArtists({limit});
-    return artistas.items.map(spotifyArtist_Artista)
+  // async searchTopArtist(limit = 20):Promise<Artist[]>{
+  //   const artists = await this.spotifyApi.getMyTopArtists({limit});
+  //   return artists.items.map(spotifyArtist_Artista)
+  // }
+
+  async getArtist():Promise<Artist[]>{
+    const artist = await this.spotifyApi.searchArtists('a',{'limit':30})
+    return artist.artists.items.map(spotifyArtist_Artista)
   }
+  // async searchIndependientArtist(id:string,offset = 0, limit=50):Promise<Artist>{
+  //   const spotifyArtist = await this.spotifyApi.getArtist(id)
 
-  async buscarArtistaIndependiente(id:string,offset = 0, limit=50):Promise<Artist>{
-    const spotifyArtista = await this.spotifyApi.getArtist(id)
+  //   if(!spotifyArtist){
+  //     return newArtist()
+  //   }else{
 
-    if(!spotifyArtista){
-      return newArtist()
-    }else{
+  //     const artist = spotifyArtist_ArtistIndependent(spotifyArtist)
+  //     this.searchAlbumByIdArtist(id)
+  //     return artist
+  //   }
+  // }
 
-      const artist = spotifyArtist_ArtistIndependent(spotifyArtista)
-      this.BuscarAlbumPorIdArtista(id)
-      return artist
-    }
-  }
+  // async searchAlbumByIdArtist(id:string,offset=0, limit=20):Promise<Album[]>{
+  //   const albums = await this.spotifyApi.getArtistAlbums(id)
 
-  async BuscarAlbumPorIdArtista(id:string,offset=0, limit=20):Promise<Album[]>{
-    const albums = await this.spotifyApi.getArtistAlbums(id)
+  //   if(!albums){
+  //     return [newAlbum()]
+  //   }else{
+  //     return albums.items.map(x => spotifyAlbums_Album(x))
+  //   }
+  // }
 
-    if(!albums){
-      return [newAlbum()]
-    }else{
-      return albums.items.map(x => spotifyAlbums_Album(x))
-    }
-  }
-
-  async BuscarCancionesAlbums(album:Album):Promise<Tracks[]>{
-    const canciones = await this.spotifyApi.getAlbumTracks(album.id)
-    if(!canciones){
-      return [newTracks()]
-    }else{
-      return canciones.items.map(x =>SpotifyTrack_Tracksimplified(x))
-    }
-  }
+  // async searchAlbumSongs(album:Album):Promise<Tracks[]>{
+  //   const songs = await this.spotifyApi.getAlbumTracks(album.id)
+  //   if(!songs){
+  //     return [newTracks()]
+  //   }else{
+  //     return songs.items.map(x =>SpotifyTrack_Tracksimplified(x))
+  //   }
+  // }
 
 ////////////////////////////////// Interact with Music ///////////////////////////////////
-  async obtenerMusicaActual():Promise<Tracks>{
+  async getCurrentTrack():Promise<Tracks>{
     const musica = await this.spotifyApi.getMyCurrentPlayingTrack()
     return spotifyTrack_TracksFull(musica.item as SpotifyApi.TrackObjectFull)
   }
@@ -181,6 +187,14 @@ export class SpotifyService {
 
   async play(){
     await this.spotifyApi.play()
+  }
+
+  async volum(value:number){
+    await this.spotifyApi.setVolume(value)
+  }
+
+  async repeat(state:SpotifyApi.PlaybackRepeatState){
+    await this.spotifyApi.setRepeat(state)
   }
 
 }

@@ -1,1 +1,33 @@
-<p>bottom-panel works!</p>
+<div class="container">
+  <!-- <div class="imagen" [style.background-image]="'url('+ song.album?.imagenUrl +')'"></div> -->
+  <div class="song">
+    <img [src]="song.album?.imagenUrl">
+    <div class="title">
+      <span>{{song.title}}</span>
+    </div>
+  </div>
+  <div class="buttons">
+    <button class="uil uil-step-backward"
+    (click)="prewiusSong()"
+    ></button>
+    <button class="uil uil-pause"
+    (click)="pauseCancion()"
+    ></button>
+    <button class="uil uil-play"
+    (click)="playSong()"
+    ></button>
+    <button class="uil uil-skip-forward"
+    (click)="nextSong()"
+    ></button>
+  </div>
+  <div class="options">
+    <div class="volum">
+      <i class="uil uil-volume"></i>
+      <input #myvolum type="range" min="0" max="100" (mouseout)="getVolum(myvolum.value)">
+    </div>
+    <div class="repeat">
+      <button (click)="setRepeat()" class="uil uil-repeat" *ngIf="!statusRepeat()"></button>
+      <button (click)="setRepeat()" class="uil uil-exchange-alt" *ngIf="statusRepeat()"></button>
+    </div>
+  </div>
+</div>

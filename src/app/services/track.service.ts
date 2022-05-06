@@ -19,7 +19,7 @@ export class TrackService {
   async getCurrentsong(){
     clearTimeout(this.timerId)
 
-    const musica = await this.spotifyService.obtenerMusicaActual()
+    const musica = await this.spotifyService.getCurrentTrack()
     this.setcurrentMusic(musica)
 
     this.timerId = setInterval(async () =>{
@@ -39,11 +39,19 @@ export class TrackService {
     await this.spotifyService.nextSong()
   }
 
-  async pausarCancion(){
+  async pauseSong(){
     await this.spotifyService.stopSong()
   }
 
-  async continuarCancion(){
+  async playSong(){
     await this.spotifyService.play()
+  }
+
+  async changeVolum(value:number){
+    await this.spotifyService.volum(value)
+  }
+
+  async repeat(state:SpotifyApi.PlaybackRepeatState){
+    await this.spotifyService.repeat(state)
   }
 }

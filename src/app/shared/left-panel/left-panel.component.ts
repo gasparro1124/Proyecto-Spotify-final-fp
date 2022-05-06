@@ -28,7 +28,7 @@ export class LeftPanelComponent implements OnInit {
   }
 
   async getAllPlayList(){
-    this.playLists = await this.SpotifyService.buscarPlayList()
+    this.playLists = await this.SpotifyService.searchPlayList()
 
     // await this.SpotifyService.createPlayList()
     // this.playLists = await this.SpotifyService.buscarPlayList()
@@ -37,6 +37,11 @@ export class LeftPanelComponent implements OnInit {
   homeClick(boton:string){
     this.menuSelecionado  = boton
     this.router.navigate(['home/your-music'])
+  }
+
+  artistClick(boton:string){
+    this.menuSelecionado  = boton
+    this.router.navigate(['home/top-artists'])
   }
 
   botonClick(boton:string){
