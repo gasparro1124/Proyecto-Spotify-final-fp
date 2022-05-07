@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { newTracks } from '../../core/makers/trackEmpty';
 import { Tracks } from '../../core/models/tracksInterface';
 import { Subscription } from 'rxjs';
@@ -9,11 +9,11 @@ import { TrackService } from '../../services/track.service';
   templateUrl: './bottom-panel.component.html',
   styleUrls: ['./bottom-panel.component.scss']
 })
-export class BottomPanelComponent implements OnInit, OnDestroy {
+export class BottomPanelComponent implements OnInit {
 
   currentVolum:number = 50
   song: Tracks = newTracks()
-  subs: Subscription[] = []
+
   state:SpotifyApi.PlaybackRepeatState = 'off'
 
   constructor(private trackService:TrackService ) { }
@@ -22,15 +22,10 @@ export class BottomPanelComponent implements OnInit, OnDestroy {
     this.getCurrentSong()
   }
 
-  ngOnDestroy(): void {
-    this.subs.forEach(e => e.unsubscribe())
-  }
-
   getCurrentSong(){
     const sub = this.trackService.currentTrack.subscribe(musica => {
       this.song = musica
     })
-    this.subs.push(sub)
   }
 
   async prewiusSong(){

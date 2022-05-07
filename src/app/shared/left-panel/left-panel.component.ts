@@ -12,7 +12,7 @@ import { AddPlayListComponent } from '../add-play-list/add-play-list.component';
 })
 export class LeftPanelComponent implements OnInit {
 
-  menuSelecionado ="Home"
+  selected ="Home"
 
   playLists: PlayList[] = [];
 
@@ -28,24 +28,29 @@ export class LeftPanelComponent implements OnInit {
   }
 
   async getAllPlayList(){
-    this.playLists = await this.SpotifyService.searchPlayList()
+    this.playLists = await this.SpotifyService.searchPlayLists()
 
     // await this.SpotifyService.createPlayList()
     // this.playLists = await this.SpotifyService.buscarPlayList()
   }
 
-  homeClick(boton:string){
-    this.menuSelecionado  = boton
+  homeClick(button:string){
+    this.selected  = button
     this.router.navigate(['home/your-music'])
   }
 
-  artistClick(boton:string){
-    this.menuSelecionado  = boton
+  artistClick(button:string){
+    this.selected  = button
     this.router.navigate(['home/top-artists'])
   }
 
-  botonClick(boton:string){
-    this.menuSelecionado  = boton
+  playListClick(id:string){
+    this.selected = id
+    this.router.navigateByUrl(`home/list/playList/${id}`)
+  }
+
+  buttonClick(button:string){
+    this.selected  = button
     this.router.navigate(['home'])
   }
 

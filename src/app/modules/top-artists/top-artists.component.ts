@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Artist } from '../../core/models/artistaInterface';
 import { SpotifyService } from '../../services/spotify.service';
 
@@ -7,20 +8,34 @@ import { SpotifyService } from '../../services/spotify.service';
   templateUrl: './top-artists.component.html',
   styleUrls: ['./top-artists.component.scss']
 })
-export class TopArtistsComponent implements OnInit, OnDestroy {
+export class TopArtistsComponent implements OnInit {
   topArtist: Artist[] = []
-
-  constructor(private spotifyService:SpotifyService) { }
+  artistSearch:string = ''
+  
+  constructor(private spotifyService:SpotifyService,private router:Router) { }
 
   ngOnInit(): void {
     this.getArtist()
   }
 
-  ngOnDestroy(): void {
-  }
-
   async getArtist(){
-    const tempoArtist = await this.spotifyService.getArtist()
+    const tempoArtist = await this.spotifyService.getArtist('a')
     this.topArtist = tempoArtist
   }
+
+  ArtistClick(id:string){
+    this.artistSearch = id
+    this.router.navigateByUrl(`home/top-artists/${id}`)
+  }
+
+  async search(){
+    if(!this.artistSearch){
+      alert('no has buscado nada')
+    }else{
+      const tempArtist = await this.spotifyService.getArtist(this.artistSearch)
+      this.topArtist = tempArtist
+      console.log(this.artistSearch)
+    }
+  }
+
 }

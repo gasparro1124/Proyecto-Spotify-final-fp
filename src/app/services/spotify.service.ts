@@ -18,6 +18,7 @@ import { spotifyAlbums_Album } from '../core/mappers/albumMapper';
 import { newArtist } from '../core/makers/artistEmpty';
 import { newAlbum } from '../core/makers/albumEmpty';
 import { newTracks } from '../core/makers/trackEmpty';
+import { newPlaylist } from '../core/makers/playlistEmpty';
 
 
 
@@ -92,13 +93,27 @@ export class SpotifyService {
 
   ///////////////////////////////// PLAYLIST //////////////////////////////////////////////
 
-  async searchPlayList(offset = 0, limit=50): Promise<PlayList[]>{
+  async searchPlayLists(offset = 0, limit=50): Promise<PlayList[]>{
     const playLists = await this.spotifyApi.getUserPlaylists(this.user.id , {offset,limit});
     return playLists.items.map(SpotifyPlayList_PlayList)
   }
 
   async createPlayList(){
     await this.spotifyApi.createPlaylist(this.user.id,{"name":"Hola","description":"hello","public":true})
+  }
+
+  async SearchPlayList(id:string,offset = 0, limit=50): Promise<PlayList>{
+    const spotyfyPlayList = await this.spotifyApi.getPlaylist(id , {offset,limit});
+
+    if(!spotyfyPlayList){
+      return newPlaylist();
+    }else{
+      const playlist = SpotifyPlayList_PlayList(spotyfyPlayList)
+
+      const songsSpoty = await this.spotifyApi.getPlaylistTracks(id,{offset,limit})
+      playlist.songs = songsSpoty.items.map(x => spotifyTrack_TracksFull(x.track as SpotifyApi.TrackObjectFull))
+      return playlist
+    }
   }
 
 
@@ -125,10 +140,6 @@ export class SpotifyService {
   //   return artists.items.map(spotifyArtist_Artista)
   // }
 
-  async getArtist():Promise<Artist[]>{
-    const artist = await this.spotifyApi.searchArtists('a',{'limit':30})
-    return artist.artists.items.map(spotifyArtist_Artista)
-  }
   // async searchIndependientArtist(id:string,offset = 0, limit=50):Promise<Artist>{
   //   const spotifyArtist = await this.spotifyApi.getArtist(id)
 
@@ -160,6 +171,13 @@ export class SpotifyService {
   //     return songs.items.map(x =>SpotifyTrack_Tracksimplified(x))
   //   }
   // }
+
+/////////////////////////////////// Search //////////////////////////////////////////////////
+
+  async getArtist(value:string):Promise<Artist[]>{
+    const artist = await this.spotifyApi.searchArtists(value,{'limit':30})
+    return artist.artists.items.map(spotifyArtist_Artista)
+  }
 
 ////////////////////////////////// Interact with Music ///////////////////////////////////
   async getCurrentTrack():Promise<Tracks>{

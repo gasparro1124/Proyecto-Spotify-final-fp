@@ -14,6 +14,10 @@ import { YourMusicComponent } from '../your-music/your-music.component';
 import {MatCardModule} from '@angular/material/card';
 import { AddToPlaylistComponent } from '../../shared/add-to-playlist/add-to-playlist.component';
 import { TopArtistsComponent } from '../top-artists/top-artists.component';
+import { FormsModule } from '@angular/forms';
+import { PlayListComponent } from '../play-list/play-list.component';
+import { ArtistSongComponent } from '../artist-song/artist-song.component';
+import { DeleteFromPlaylistComponent } from '../../shared/delete-from-playlist/delete-from-playlist.component';
 
 
 
@@ -30,12 +34,16 @@ import { TopArtistsComponent } from '../top-artists/top-artists.component';
     AddToPlaylistComponent,
     UserPanelComponent,
     YourMusicComponent,
-    TopArtistsComponent
+    TopArtistsComponent,
+    PlayListComponent,
+    ArtistSongComponent,
+    DeleteFromPlaylistComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(HomeRoutes),
-    MatCardModule
+    MatCardModule,
+    FormsModule
   ]
 })
 export class HomeModule { }

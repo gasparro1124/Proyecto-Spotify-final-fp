@@ -1,9 +1,15 @@
 <div class="my-artist">
-  <p class="title" >
-    Top Artistas
-  </p>
+  <div class="top">
+    <h1 class="title" >
+      Top Artistas
+    </h1>
+    <div class="search">
+      <input type="text" placeholder="Search" [(ngModel)]="artistSearch">
+      <button (click) = "search()" >Search</button>
+    </div>
+  </div>
   <div class="card-container">
-    <mat-card *ngFor="let artist of topArtist">
+    <mat-card *ngFor="let artist of topArtist" (click) =ArtistClick(artist.id) >
       <div class="img-container">
         <img src={{artist.imagenUrl}}>
         <p>{{artist.name}}</p>

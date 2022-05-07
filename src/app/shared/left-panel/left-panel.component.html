@@ -8,7 +8,7 @@
       <app-menu-boton
         [descripcion]="'Home'"
         [icon]="homeIcon"
-        [seleccionado]="menuSelecionado =='Home'"
+        [seleccionado]="selected =='Home'"
         (click) = "homeClick('Home')"
         >
       </app-menu-boton>
@@ -16,15 +16,15 @@
       <app-menu-boton
         [descripcion]="'Search'"
         [icon]="seacrhIcon"
-        [seleccionado] ="menuSelecionado =='Search'"
-        (click) = "botonClick('Search')"
+        [seleccionado] ="selected =='Search'"
+        (click) = "buttonClick('Search')"
         >
       </app-menu-boton>
 
       <app-menu-boton
         [descripcion]="'Artists'"
         [icon]="artistIcon"
-        [seleccionado] = "menuSelecionado =='Artist'"
+        [seleccionado] = "selected =='Artist'"
         (click) = "artistClick('Artist')"
         >
       </app-menu-boton>
@@ -40,8 +40,8 @@
         <app-menu-boton *ngFor="let playlist of playLists"
           [icon]= "playlisticon"
           [descripcion]="playlist.name"
-          [seleccionado]="menuSelecionado == playlist.id"
-          (click) = "botonClick(playlist.id);"
+          [seleccionado]="selected == playlist.id"
+          (click) = "playListClick(playlist.id);"
           ></app-menu-boton>
       </div>
 

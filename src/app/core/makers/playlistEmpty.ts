@@ -5,7 +5,7 @@ export function newPlaylist():PlayList{
   return{
     id: "",
     name: '',
-    imagenUrl: '',
+    imagenUrl: '../../../assets/images/iconos/playList.jpg',
     songs:[]
   }
 }

@@ -1,10 +1,14 @@
-<div class="my-music">
-  <p class="title" >
-    Tus canciones
-  </p>
-
+<div class="playList">
+  <div class="top">
+    <h1 class="title" >
+      {{title}}
+    </h1>
+    <div class="img">
+      <img [src]=img>
+     </div>
+  </div>
   <div class="card-container">
-    <mat-card *ngFor="let song of songs" [class.executing]="song.id == currentSong.id">
+    <mat-card *ngFor="let song of tracks" [class.executing]="song.id == curretTrack.id">
       <div class="img-container">
         <img src={{song.album?.imagenUrl}}>
         <p>{{song.title}}</p>
@@ -12,7 +16,7 @@
       <div class="info">
         <p>{{song.time}}</p>
         <button class="uil uil-play play" (click)="launchMusic(song)"></button>
-        <button class="uil uil-plus" (click)="openDialog()"></button>
+        <button class="uil uil-minus" (click)="openDialog()"></button>
       </div>
     </mat-card>
   </div>
