@@ -1,1 +1,24 @@
-<p>artist-song works!</p>
+<div class="album-songs">
+  <div class="top">
+    <button class="uil uil-previous" (click)="backToAlbumArtist()"></button>
+    <h1 class="title" >
+      {{title}}
+    </h1>
+    <div class="img">
+      <img [src]=img>
+     </div>
+  </div>
+  <div class="card-container">
+    <mat-card *ngFor="let song of tracks" [class.executing]="song.id == curretTrack.id">
+      <div class="img-container">
+        <img src={{song.album?.imagenUrl}}>
+        <p>{{song.title}}</p>
+      </div>
+      <div class="info">
+        <p>{{song.time}}</p>
+        <button class="uil uil-play play" (click)="launchMusic(song)"></button>
+        <button class="uil uil-plus" (click)="openDialog()"></button>
+      </div>
+    </mat-card>
+  </div>
+</div>

@@ -39,21 +39,19 @@ export class PlayListComponent implements OnInit {
   }
 
   async getPlayList(id:string){
-    await this.getDateFromPlayList(id)
+    await this.getDatesFromPlayList(id)
   }
 
-  async getDateFromPlayList(playlist:string){
+  async getDatesFromPlayList(playlist:string){
     const playlistTracks = await this.spotifyService.SearchPlayList(playlist)
     this.defineDatesPages(playlistTracks.name,playlistTracks.songs as Tracks[], playlistTracks.imagenUrl)
     this.title = 'Musica PlayList ' + playlistTracks.name
-    console.log(playlistTracks)
   }
 
 
   defineDatesPages(title:string,songs:Tracks[], img:string){
     this.title = title,
     this.tracks = songs
-    console.log(img)
 
     if(!img)
       this.img = '../../../assets/images/iconos/playList.jpg'

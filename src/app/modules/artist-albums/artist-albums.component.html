@@ -1,0 +1,17 @@
+<div class="my-albums">
+  <div class="top">
+    <button class="uil uil-previous" (click)="backToArtists()"></button>
+    <h1 class="title" >
+      Albums de: {{title}}
+    </h1>
+  </div>
+  <div class="card-container">
+    <mat-card *ngFor="let album of albums" (click) =AlbumClick(album.id) >
+      <div class="img-container">
+        <img src={{album.imagenUrl}}>
+        <p>{{album.name}}</p>
+      </div>
+    </mat-card>
+  </div>
+</div>
+

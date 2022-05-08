@@ -11,7 +11,7 @@ import { SpotifyService } from '../../services/spotify.service';
 export class TopArtistsComponent implements OnInit {
   topArtist: Artist[] = []
   artistSearch:string = ''
-  
+
   constructor(private spotifyService:SpotifyService,private router:Router) { }
 
   ngOnInit(): void {
@@ -19,7 +19,7 @@ export class TopArtistsComponent implements OnInit {
   }
 
   async getArtist(){
-    const tempoArtist = await this.spotifyService.getArtist('a')
+    const tempoArtist = await this.spotifyService.getArtists('a')
     this.topArtist = tempoArtist
   }
 
@@ -32,9 +32,8 @@ export class TopArtistsComponent implements OnInit {
     if(!this.artistSearch){
       alert('no has buscado nada')
     }else{
-      const tempArtist = await this.spotifyService.getArtist(this.artistSearch)
+      const tempArtist = await this.spotifyService.getArtists(this.artistSearch)
       this.topArtist = tempArtist
-      console.log(this.artistSearch)
     }
   }
 

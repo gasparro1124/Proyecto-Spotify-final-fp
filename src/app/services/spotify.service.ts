@@ -14,7 +14,7 @@ import { Tracks } from '../core/models/tracksInterface';
 import { Artist } from '../core/models/artistaInterface';
 import { spotifyArtist_Artista, spotifyArtist_ArtistIndependent } from '../core/mappers/artistMapper';
 import { Album } from '../core/models/albumInterface';
-import { spotifyAlbums_Album } from '../core/mappers/albumMapper';
+import { spotifyAlbums_Album, spotifyAlbum_Album } from '../core/mappers/albumMapper';
 import { newArtist } from '../core/makers/artistEmpty';
 import { newAlbum } from '../core/makers/albumEmpty';
 import { newTracks } from '../core/makers/trackEmpty';
@@ -140,43 +140,63 @@ export class SpotifyService {
   //   return artists.items.map(spotifyArtist_Artista)
   // }
 
-  // async searchIndependientArtist(id:string,offset = 0, limit=50):Promise<Artist>{
-  //   const spotifyArtist = await this.spotifyApi.getArtist(id)
+  async searchIndependientArtist(id:string,offset = 0, limit=50):Promise<Artist>{
+    const spotifyArtist = await this.spotifyApi.getArtist(id)
 
-  //   if(!spotifyArtist){
-  //     return newArtist()
-  //   }else{
+    if(!spotifyArtist){
+      return newArtist()
+    }else{
 
-  //     const artist = spotifyArtist_ArtistIndependent(spotifyArtist)
-  //     this.searchAlbumByIdArtist(id)
-  //     return artist
-  //   }
-  // }
+      const artist = spotifyArtist_ArtistIndependent(spotifyArtist)
+      this.searchAlbumByIdArtist(id)
+      return artist
+    }
+  }
 
-  // async searchAlbumByIdArtist(id:string,offset=0, limit=20):Promise<Album[]>{
-  //   const albums = await this.spotifyApi.getArtistAlbums(id)
+  async searchAlbumByIdArtist(id:string,offset=0, limit=20):Promise<Album[]>{
+    const albums = await this.spotifyApi.getArtistAlbums(id)
 
-  //   if(!albums){
-  //     return [newAlbum()]
-  //   }else{
-  //     return albums.items.map(x => spotifyAlbums_Album(x))
-  //   }
-  // }
+    if(!albums){
+      return [newAlbum()]
+    }else{
+      return albums.items.map(x => spotifyAlbums_Album(x))
+    }
+  }
 
-  // async searchAlbumSongs(album:Album):Promise<Tracks[]>{
-  //   const songs = await this.spotifyApi.getAlbumTracks(album.id)
-  //   if(!songs){
-  //     return [newTracks()]
-  //   }else{
-  //     return songs.items.map(x =>SpotifyTrack_Tracksimplified(x))
-  //   }
-  // }
+  async searchAlbumSongs(album:Album):Promise<Tracks[]>{
+    const songs = await this.spotifyApi.getAlbumTracks(album.id) //await this.spotifyApi.getAlbumTracks(album.id)
+    if(!songs){
+      return [newTracks()]
+    }else{
+      return songs.items.map(x =>SpotifyTrack_Tracksimplified(x))
+    }
+  }
+
+
 
 /////////////////////////////////// Search //////////////////////////////////////////////////
 
-  async getArtist(value:string):Promise<Artist[]>{
+  async getArtists(value:string):Promise<Artist[]>{
     const artist = await this.spotifyApi.searchArtists(value,{'limit':30})
     return artist.artists.items.map(spotifyArtist_Artista)
+  }
+
+  async getOneArtist(id:string):Promise<Artist>{
+    const artist =  await this.spotifyApi.getArtist(id)
+    if(!artist){
+      return newArtist()
+    }else{
+     return spotifyArtist_ArtistIndependent(artist)
+    }
+  }
+
+  async getOneAlbum(id:string):Promise<Album>{
+    const album = await this.spotifyApi.getAlbum(id)
+    if(!album){
+      return newAlbum()
+    }else{
+      return spotifyAlbum_Album(album)
+    }
   }
 
 ////////////////////////////////// Interact with Music ///////////////////////////////////

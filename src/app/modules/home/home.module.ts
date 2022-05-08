@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { PlayListComponent } from '../play-list/play-list.component';
 import { ArtistSongComponent } from '../artist-song/artist-song.component';
 import { DeleteFromPlaylistComponent } from '../../shared/delete-from-playlist/delete-from-playlist.component';
+import { ArtistAlbumsComponent } from '../artist-albums/artist-albums.component';
 
 
 
@@ -37,7 +38,8 @@ import { DeleteFromPlaylistComponent } from '../../shared/delete-from-playlist/d
     TopArtistsComponent,
     PlayListComponent,
     ArtistSongComponent,
-    DeleteFromPlaylistComponent
+    DeleteFromPlaylistComponent,
+    ArtistAlbumsComponent
   ],
   imports: [
     CommonModule,
