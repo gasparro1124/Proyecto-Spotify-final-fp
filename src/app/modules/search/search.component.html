@@ -1,0 +1,66 @@
+<div class="search-page">
+  <div class="top">
+    <h1 class="title" >
+      Search
+    </h1>
+    <div class="search">
+      <input type="text" placeholder="Search" [(ngModel)]="value">
+      <button (click) = "search()" >Search</button>
+    </div>
+  </div>
+  <div class="container-container">
+    <h1 class="subTitle">Tracks</h1>
+    <div class="container">
+      <div class="card-container">
+        <mat-card *ngFor="let song of tracks" [class.executing]="song.id == curretTrack.id">
+          <div class="img-container">
+            <img src={{song.album?.imagenUrl}}>
+            <p>{{song.title}}</p>
+          </div>
+          <div class="info">
+            <p>{{song.time}}</p>
+            <button class="uil uil-play play" (click)="launchMusic(song)"></button>
+            <button class="uil uil-minus" (click)="openDialog()"></button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <h1 class="subTitle">Albums</h1>
+    <div class="container">
+      <div class="card-container">
+        <mat-card class="albums" *ngFor="let album of albums" (click) =AlbumClick(album.id) >
+          <div class="img-container">
+            <img src={{album.imagenUrl}}>
+            <p>{{album.name}}</p>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <h1 class="subTitle">Artists</h1>
+    <div class="container">
+      <div class="card-container">
+        <mat-card class="artist" *ngFor="let artist of artists" (click) =ArtistClick(artist.id) >
+          <div class="img-container">
+            <img src={{artist.imagenUrl}}>
+            <p>{{artist.name}}</p>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <h1 class="subTitle">PlayLists</h1>
+    <div class="container">
+      <div class="card-container">
+        <mat-card class="playList" *ngFor="let playlist of playlists" (click) =playListClick(playlist.id) >
+          <div class="img-container">
+            <img src={{playlist.imagenUrl}}>
+            <p>{{playlist.name}}</p>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+  </div>
+</div>

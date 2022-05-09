@@ -1,23 +1,22 @@
 import { newArtist } from '../makers/artistEmpty';
 import { Artist } from '../models/artistaInterface';
 
-export function spotifyArtist_Artista(spotifyArtista:SpotifyApi.ArtistObjectFull):Artist{
+export function spotifyArtist_Artist(spotifyArtist:SpotifyApi.ArtistObjectFull):Artist{
 
-  if(spotifyArtista.images.sort().pop()?.url!)
+  if(spotifyArtist.images.sort().pop()?.url!)
     return {
-      id:spotifyArtista.id,
-      imagenUrl:spotifyArtista.images.sort().pop()?.url!,
-      name:spotifyArtista.name
+      id:spotifyArtist.id,
+      imagenUrl:spotifyArtist.images.sort().pop()?.url!,
+      name:spotifyArtist.name
     }
   else{
     return {
-      id:spotifyArtista.id,
+      id:spotifyArtist.id,
       imagenUrl:'../../../assets/images/iconos/artist.jpg',
-      name:spotifyArtista.name
+      name:spotifyArtist.name
     }
   }
 }
-
 
 export function spotifyArtist_ArtistIndependent(artists:SpotifyApi.SingleArtistResponse):Artist{
 

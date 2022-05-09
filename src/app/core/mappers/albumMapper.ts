@@ -1,4 +1,5 @@
 import { Album } from "../models/albumInterface";
+import { Artist } from '../models/artistaInterface';
 
 export function spotifyAlbums_Album(spotifyAlbums:SpotifyApi.AlbumObjectSimplified):Album{
   if(spotifyAlbums.images.sort().pop()?.url!){
@@ -11,7 +12,7 @@ export function spotifyAlbums_Album(spotifyAlbums:SpotifyApi.AlbumObjectSimplifi
     return{
       id:spotifyAlbums.id,
       imagenUrl:'../../../assets/images/iconos/albums.jpg',
-      name:spotifyAlbums.name
+      name:spotifyAlbums.name,
     }
   }
 }

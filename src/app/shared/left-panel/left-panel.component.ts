@@ -49,9 +49,9 @@ export class LeftPanelComponent implements OnInit {
     this.router.navigateByUrl(`home/list/playList/${id}`)
   }
 
-  buttonClick(button:string){
+  searchClick(button:string){
     this.selected  = button
-    this.router.navigate(['home'])
+    this.router.navigate(['home/search'])
   }
 
   openDialog() {

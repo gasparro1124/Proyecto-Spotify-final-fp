@@ -12,13 +12,15 @@ import { SpotifyUser_apiToUser } from '../core/mappers/userMapper';
 import {  spotifyTrack_TracksFull, SpotifyTrack_Tracksimplified } from '../core/mappers/tracksMapper';
 import { Tracks } from '../core/models/tracksInterface';
 import { Artist } from '../core/models/artistaInterface';
-import { spotifyArtist_Artista, spotifyArtist_ArtistIndependent } from '../core/mappers/artistMapper';
+import { spotifyArtist_Artist, spotifyArtist_ArtistIndependent } from '../core/mappers/artistMapper';
 import { Album } from '../core/models/albumInterface';
 import { spotifyAlbums_Album, spotifyAlbum_Album } from '../core/mappers/albumMapper';
 import { newArtist } from '../core/makers/artistEmpty';
 import { newAlbum } from '../core/makers/albumEmpty';
 import { newTracks } from '../core/makers/trackEmpty';
 import { newPlaylist } from '../core/makers/playlistEmpty';
+import { Search } from '../core/models/searchInterface';
+import { newSearch } from '../core/makers/searchEmpty';
 
 
 
@@ -128,17 +130,7 @@ export class SpotifyService {
     return yourSongs
   }
 
-  // async SearchMySongs(offset = 0, limit=50):Promise<Tracks[]>{
-  //   const canciones = await this.spotifyApi.getMySavedTracks({offset, limit});
-  //   return canciones.items.map(x => spotifyTrack_TracksFull(x.track))
-  // }
-
   /////////////////////////////////////////Top Artistas /////////////////////////////////////////
-
-  // async searchTopArtist(limit = 20):Promise<Artist[]>{
-  //   const artists = await this.spotifyApi.getMyTopArtists({limit});
-  //   return artists.items.map(spotifyArtist_Artista)
-  // }
 
   async searchIndependientArtist(id:string,offset = 0, limit=50):Promise<Artist>{
     const spotifyArtist = await this.spotifyApi.getArtist(id)
@@ -152,6 +144,8 @@ export class SpotifyService {
       return artist
     }
   }
+
+  //////////////////////////////////Albums////////////////////////////////////////////////
 
   async searchAlbumByIdArtist(id:string,offset=0, limit=20):Promise<Album[]>{
     const albums = await this.spotifyApi.getArtistAlbums(id)
@@ -178,7 +172,7 @@ export class SpotifyService {
 
   async getArtists(value:string):Promise<Artist[]>{
     const artist = await this.spotifyApi.searchArtists(value,{'limit':30})
-    return artist.artists.items.map(spotifyArtist_Artista)
+    return artist.artists.items.map(spotifyArtist_Artist)
   }
 
   async getOneArtist(id:string):Promise<Artist>{
@@ -197,6 +191,21 @@ export class SpotifyService {
     }else{
       return spotifyAlbum_Album(album)
     }
+  }
+
+  async getSearch(value:string):Promise<Search>{
+    const temSearch = await this.spotifyApi.search(value, ["album","artist","playlist","track"])
+    if(!temSearch){
+      return newSearch()
+    }else{
+      return{
+        artist:temSearch.artists?.items.map(x => spotifyArtist_Artist(x)) as Artist[],
+        albums: temSearch.albums?.items.map(x => spotifyAlbums_Album(x)) as Album[],
+        tracks:temSearch.tracks?.items.map(x => spotifyTrack_TracksFull(x)) as Tracks[],
+        playList:temSearch.playlists?.items.map(x=> SpotifyPlayList_PlayList(x)) as PlayList[]
+      }
+    }
+
   }
 
 ////////////////////////////////// Interact with Music ///////////////////////////////////

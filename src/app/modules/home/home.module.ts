@@ -19,6 +19,8 @@ import { PlayListComponent } from '../play-list/play-list.component';
 import { ArtistSongComponent } from '../artist-song/artist-song.component';
 import { DeleteFromPlaylistComponent } from '../../shared/delete-from-playlist/delete-from-playlist.component';
 import { ArtistAlbumsComponent } from '../artist-albums/artist-albums.component';
+import { SearchComponent } from '../search/search.component';
+import { AlbumsComponent } from '../albums/albums.component';
 
 
 
@@ -39,7 +41,9 @@ import { ArtistAlbumsComponent } from '../artist-albums/artist-albums.component'
     PlayListComponent,
     ArtistSongComponent,
     DeleteFromPlaylistComponent,
-    ArtistAlbumsComponent
+    ArtistAlbumsComponent,
+    SearchComponent,
+    AlbumsComponent
   ],
   imports: [
     CommonModule,

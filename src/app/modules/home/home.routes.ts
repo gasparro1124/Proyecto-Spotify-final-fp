@@ -5,6 +5,8 @@ import { TopArtistsComponent } from '../top-artists/top-artists.component';
 import { PlayListComponent } from '../play-list/play-list.component';
 import { ArtistSongComponent } from '../artist-song/artist-song.component';
 import { ArtistAlbumsComponent } from '../artist-albums/artist-albums.component';
+import { SearchComponent } from '../search/search.component';
+import { AlbumsComponent } from '../albums/albums.component';
 
 
 export const HomeRoutes: Routes = [
@@ -31,6 +33,14 @@ export const HomeRoutes: Routes = [
       {
         path:'top-artists/:artist/:id',
         component:ArtistSongComponent
+      },
+      {
+        path:'search',
+        component:SearchComponent
+      },
+      {
+        path:'album/:id',
+        component:AlbumsComponent
       }
 
     ]
