@@ -65,6 +65,8 @@
         display: flex;
         flex-direction: column;
         height: 6.5%;
+        min-height: 280px;
+        min-width: 100%;
         width: 100%;
         background-color: gray;
         overflow-y: scroll;
@@ -138,6 +140,18 @@
               button:hover{
                 background-color:rgb(111, 219, 90);
               }
+
+              .go-to{
+                cursor: pointer;
+                width: 110px;
+                height: 40px;
+                border-radius: 40%;
+                background-color: gray;
+              }
+
+              .go-to:hover{
+                background-color:rgb(111, 219, 90);
+              }
             }
           }
 
@@ -146,10 +160,6 @@
           }
 
           .artist{
-            cursor: pointer;
-          }
-
-          .playList{
             cursor: pointer;
           }
         }

@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PlayList } from 'src/app/core/models/playlistInterface';
 import { SpotifyService } from '../../services/spotify.service';
-import { AddPlayListComponent } from '../add-play-list/add-play-list.component';
+
 
 @Component({
   selector: 'app-left-panel',
@@ -21,7 +21,7 @@ export class LeftPanelComponent implements OnInit {
   artistIcon = "uil uil-boombox"
   playlisticon  = "uil uil-list-ul"
 
-  constructor(private router:Router,private SpotifyService:SpotifyService,private addPlayListDialog: MatDialog) { }
+  constructor(private router:Router,private SpotifyService:SpotifyService) { }
 
   ngOnInit(): void {
     this.getAllPlayList()
@@ -53,14 +53,4 @@ export class LeftPanelComponent implements OnInit {
     this.selected  = button
     this.router.navigate(['home/search'])
   }
-
-  openDialog() {
-    this.addPlayListDialog.open(AddPlayListComponent, {
-    width:'30%'
-    });
-  }
-
-
-
-
 }

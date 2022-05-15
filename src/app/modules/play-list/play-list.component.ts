@@ -4,8 +4,6 @@ import { newTracks } from '../../core/makers/trackEmpty';
 import { SpotifyService } from '../../services/spotify.service';
 import { TrackService } from '../../services/track.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { DeleteFromPlaylistComponent } from '../../shared/delete-from-playlist/delete-from-playlist.component';
 
 @Component({
   selector: 'app-play-list',
@@ -22,8 +20,7 @@ export class PlayListComponent implements OnInit {
 
   constructor( private activeRoute:ActivatedRoute,
                private spotifyService:SpotifyService,
-               private trackservice:TrackService,
-               private addToPlaylistDialog: MatDialog) { }
+               private trackservice:TrackService) { }
 
   ngOnInit(): void {
     this.getCurrentMusic()
@@ -35,6 +32,7 @@ export class PlayListComponent implements OnInit {
     .subscribe(async (params) => {
       const id = params.get('id')
       await this.getPlayList(id as string)
+      console.log(id)
     })
   }
 
@@ -69,9 +67,13 @@ export class PlayListComponent implements OnInit {
     await this.spotifyService.lunchMusic(track.uri)
   }
 
-  openDialog() {
-    this.addToPlaylistDialog.open(DeleteFromPlaylistComponent, {
-    width:'30%'
-    });
-  }
+  // this.userService.editUser(user).subscribe(u=>{
+  //   const idToUpdate = u
+  //     ? this.users.findIndex(c => c.id == u.id)
+  //     :-1
+  //   if( idToUpdate > -1){
+  //     this.users[idToUpdate] = user
+  //     this.userService.allUsers = this.users
+  //   }
+  // }
 }

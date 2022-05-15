@@ -20,7 +20,6 @@
           <div class="info">
             <p>{{song.time}}</p>
             <button class="uil uil-play play" (click)="launchMusic(song)"></button>
-            <button class="uil uil-minus" (click)="openDialog()"></button>
           </div>
         </mat-card>
       </div>
@@ -53,10 +52,14 @@
     <h1 class="subTitle">PlayLists</h1>
     <div class="container">
       <div class="card-container">
-        <mat-card class="playList" *ngFor="let playlist of playlists" (click) =playListClick(playlist.id) >
+        <mat-card class="playList" *ngFor="let playlist of playlists">
           <div class="img-container">
             <img src={{playlist.imagenUrl}}>
             <p>{{playlist.name}}</p>
+          </div>
+          <div class="info">
+            <button class="uil uil-plus" (click)="openDialog()"></button>
+            <button class="go-to" (click) =playListClick(playlist.id) >go To PlayList</button>
           </div>
         </mat-card>
       </div>

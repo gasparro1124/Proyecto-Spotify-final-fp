@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { newAlbum } from 'src/app/core/makers/albumEmpty';
 import { newTracks } from 'src/app/core/makers/trackEmpty';
@@ -7,7 +6,6 @@ import { Album } from 'src/app/core/models/albumInterface';
 import { Tracks } from 'src/app/core/models/tracksInterface';
 import { SpotifyService } from 'src/app/services/spotify.service';
 import { TrackService } from 'src/app/services/track.service';
-import { AddToPlaylistComponent } from 'src/app/shared/add-to-playlist/add-to-playlist.component';
 
 @Component({
   selector: 'app-albums',
@@ -24,12 +22,10 @@ export class AlbumsComponent implements OnInit {
   title:string = ''
   img:string = ''
 
-
   constructor(private Router:Router,
               private activeRoute:ActivatedRoute,
               private spotifyService:SpotifyService,
-              private trackservice:TrackService,
-              private addToPlaylistDialog: MatDialog)
+              private trackservice:TrackService)
               { }
 
   ngOnInit(): void {
@@ -71,11 +67,5 @@ export class AlbumsComponent implements OnInit {
 
   async launchMusic(track:Tracks){
     await this.spotifyService.lunchMusic(track.uri)
-  }
-
-  openDialog() {
-    this.addToPlaylistDialog.open(AddToPlaylistComponent, {
-    width:'30%'
-    });
   }
 }

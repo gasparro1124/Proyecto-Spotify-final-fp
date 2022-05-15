@@ -24,7 +24,7 @@ export class TrackService {
 
     this.timerId = setInterval(async () =>{
       await this.getCurrentsong()
-    },3000)
+    },1000)
   }
 
   setcurrentMusic(musica:Tracks){

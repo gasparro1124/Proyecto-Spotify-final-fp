@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { newTracks } from 'src/app/core/makers/trackEmpty';
 import { SpotifyService } from 'src/app/services/spotify.service';
@@ -7,7 +6,6 @@ import { TrackService } from 'src/app/services/track.service';
 import { Tracks } from '../../core/models/tracksInterface';
 import { Album } from '../../core/models/albumInterface';
 import { newAlbum } from '../../core/makers/albumEmpty';
-import { AddToPlaylistComponent } from '../../shared/add-to-playlist/add-to-playlist.component';
 
 @Component({
   selector: 'app-artist-song',
@@ -29,8 +27,7 @@ export class ArtistSongComponent implements OnInit {
   constructor(private Router:Router,
               private activeRoute:ActivatedRoute,
               private spotifyService:SpotifyService,
-              private trackservice:TrackService,
-              private addToPlaylistDialog: MatDialog)
+              private trackservice:TrackService)
               { }
 
   ngOnInit(): void {
@@ -73,11 +70,5 @@ export class ArtistSongComponent implements OnInit {
 
   async launchMusic(track:Tracks){
     await this.spotifyService.lunchMusic(track.uri)
-  }
-
-  openDialog() {
-    this.addToPlaylistDialog.open(AddToPlaylistComponent, {
-    width:'30%'
-    });
   }
 }
