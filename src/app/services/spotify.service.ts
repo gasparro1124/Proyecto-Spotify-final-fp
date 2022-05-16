@@ -118,6 +118,14 @@ export class SpotifyService {
     }
   }
 
+  async addPlaylist(playlist:PlayList):Promise<void>{
+    await this.spotifyApi.followPlaylist(playlist.id)
+  }
+
+  async deletePlayList(playlist:PlayList):Promise<void>{
+    await this.spotifyApi.unfollowPlaylist(playlist.id)
+  }
+
 
   ///////////////////////////////////////////Mi musica//////////////////////////////////////////
   async getMyMusic():Promise<Tracks[]>{

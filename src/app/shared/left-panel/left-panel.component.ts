@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PlayList } from 'src/app/core/models/playlistInterface';
 import { SpotifyService } from '../../services/spotify.service';
+import { PlaylistService } from '../../services/playlist.service';
 
 
 @Component({
@@ -21,17 +22,16 @@ export class LeftPanelComponent implements OnInit {
   artistIcon = "uil uil-boombox"
   playlisticon  = "uil uil-list-ul"
 
-  constructor(private router:Router,private SpotifyService:SpotifyService) { }
+  constructor(private router:Router,private SpotifyService:SpotifyService, private playlistService:PlaylistService) { }
 
   ngOnInit(): void {
     this.getAllPlayList()
   }
 
   async getAllPlayList(){
-    this.playLists = await this.SpotifyService.searchPlayLists()
-
-    // await this.SpotifyService.createPlayList()
-    // this.playLists = await this.SpotifyService.buscarPlayList()
+    this.playlistService.playListvisibility.subscribe((value)=>{
+      this.playLists = value
+    })
   }
 
   homeClick(button:string){

@@ -12,6 +12,7 @@ import { newArtist } from 'src/app/core/makers/artistEmpty';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPlayListComponent } from '../../shared/add-play-list/add-play-list.component';
 import { TrackService } from '../../services/track.service';
+import { PlaylistService } from '../../services/playlist.service';
 
 @Component({
   selector: 'app-search',
@@ -26,11 +27,18 @@ export class SearchComponent implements OnInit {
   albums:Album[] = [newAlbum()]
   playlists:PlayList[] = [newPlaylist()]
   artists:Artist[] = [newArtist()]
+  MyAllPlaylist:PlayList[]= [newPlaylist()]
 
-  constructor( private spotifyService: SpotifyService,private trackService:TrackService,private addToPlaylistDialog: MatDialog,private Router:Router,) { }
+  constructor( private spotifyService: SpotifyService,private trackService:TrackService,
+    private addToPlaylistDialog: MatDialog,
+    private Router:Router,
+    private playlistService:PlaylistService) { }
 
   ngOnInit(): void {
     this.initialsearch()
+    this.playlistService.playListvisibility.subscribe((value)=>{
+      this.MyAllPlaylist = value
+    })
   }
 
   async initialsearch(){
@@ -82,5 +90,13 @@ export class SearchComponent implements OnInit {
     this.addToPlaylistDialog.open(AddPlayListComponent, {
     width:'30%'
     });
+  }
+
+  async addPlaylist(playlist:PlayList){
+    await this.playlistService.addPlaylist(playlist)
+  }
+
+  async deletePlaylist(playList:PlayList){
+    await this.playlistService.deletePlaylist(playList)
   }
 }

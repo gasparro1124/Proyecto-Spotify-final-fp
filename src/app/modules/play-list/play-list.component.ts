@@ -4,6 +4,9 @@ import { newTracks } from '../../core/makers/trackEmpty';
 import { SpotifyService } from '../../services/spotify.service';
 import { TrackService } from '../../services/track.service';
 import { ActivatedRoute } from '@angular/router';
+import { PlayList } from 'src/app/core/models/playlistInterface';
+import { PlaylistService } from '../../services/playlist.service';
+import { newPlaylist } from 'src/app/core/makers/playlistEmpty';
 
 @Component({
   selector: 'app-play-list',
@@ -14,13 +17,20 @@ export class PlayListComponent implements OnInit {
 
   tracks:Tracks[] =[]
   curretTrack:Tracks = newTracks()
+  MyAllPlaylist:PlayList[]= [newPlaylist()]
+  actualPlaylist:PlayList = newPlaylist()
 
   title:string = ''
   img:string = ''
 
   constructor( private activeRoute:ActivatedRoute,
                private spotifyService:SpotifyService,
-               private trackservice:TrackService) { }
+               private trackservice:TrackService,
+               private playlistService:PlaylistService) {
+                this.playlistService.playListvisibility.subscribe((value)=>{
+                  this.MyAllPlaylist = value
+                })
+              }
 
   ngOnInit(): void {
     this.getCurrentMusic()
@@ -42,6 +52,7 @@ export class PlayListComponent implements OnInit {
 
   async getDatesFromPlayList(playlist:string){
     const playlistTracks = await this.spotifyService.SearchPlayList(playlist)
+    this.actualPlaylist = playlistTracks
     this.defineDatesPages(playlistTracks.name,playlistTracks.songs as Tracks[], playlistTracks.imagenUrl)
     this.title = 'Musica PlayList ' + playlistTracks.name
   }
@@ -67,13 +78,11 @@ export class PlayListComponent implements OnInit {
     await this.spotifyService.lunchMusic(track.uri)
   }
 
-  // this.userService.editUser(user).subscribe(u=>{
-  //   const idToUpdate = u
-  //     ? this.users.findIndex(c => c.id == u.id)
-  //     :-1
-  //   if( idToUpdate > -1){
-  //     this.users[idToUpdate] = user
-  //     this.userService.allUsers = this.users
-  //   }
-  // }
+  async addPlaylist(playlist:PlayList){
+    await this.playlistService.addPlaylist(playlist)
+  }
+
+  async deletePlaylist(playList:PlayList){
+    await this.playlistService.deletePlaylist(playList)
+  }
 }

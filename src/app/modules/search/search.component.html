@@ -58,8 +58,9 @@
             <p>{{playlist.name}}</p>
           </div>
           <div class="info">
-            <button class="uil uil-plus" (click)="openDialog()"></button>
+            <button class="uil uil-plus" (click)="addPlaylist(playlist)"></button>
             <button class="go-to" (click) =playListClick(playlist.id) >go To PlayList</button>
+            <button class="uil uil-minus" (click)="deletePlaylist(playlist)"></button>
           </div>
         </mat-card>
       </div>
