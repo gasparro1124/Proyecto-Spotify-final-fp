@@ -155,8 +155,8 @@ export class SpotifyService {
 
   //////////////////////////////////Albums////////////////////////////////////////////////
 
-  async searchAlbumByIdArtist(id:string,offset=0, limit=20):Promise<Album[]>{
-    const albums = await this.spotifyApi.getArtistAlbums(id)
+  async searchAlbumByIdArtist(id:string,offset=0, limit=50):Promise<Album[]>{
+    const albums = await this.spotifyApi.getArtistAlbums(id, {'offset':offset,'limit':limit})
 
     if(!albums){
       return [newAlbum()]
